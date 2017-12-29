@@ -2,8 +2,6 @@ package serials_now_api
 
 import (
 	"net/http"
-	"fmt"
-	"os"
 	"net/url"
 )
 
