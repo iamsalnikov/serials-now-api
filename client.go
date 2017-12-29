@@ -24,11 +24,10 @@ func NewClient(baseUri string) (*Client, error) {
 	}, nil
 }
 
-func (c *Client) Send(endpoint EndpointInterface) {
+func (c *Client) Send(endpoint EndpointInterface) error {
 	req, err := endpoint.BuildHttpRequest()
 	if err != nil {
-		fmt.Println("error", err)
-		os.Exit(1)
+		return err
 	}
 
 	req.Host = c.baseUri.Host
@@ -37,9 +36,9 @@ func (c *Client) Send(endpoint EndpointInterface) {
 
 	resp, err := c.client.Do(req)
 	if err != nil {
-		fmt.Println("response error", err)
-		os.Exit(1)
+		return err
 	}
 
-	endpoint.ParseResponse(resp)
+	defer resp.Body.Close()
+	return endpoint.ParseResponse(resp)
 }
