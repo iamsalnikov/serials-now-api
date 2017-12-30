@@ -1,4 +1,4 @@
-package search
+package index
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 var UnexpectedStatusCode = errors.New("unexpected status code")
 
 type Endpoint struct {
-	Serials []Serial
+	Serials [][]Serial
 }
 
 func NewEndpoint() *Endpoint {
@@ -17,7 +17,7 @@ func NewEndpoint() *Endpoint {
 }
 
 func (e *Endpoint) BuildHttpRequest() (*http.Request, error) {
-	return http.NewRequest(http.MethodGet, "/json/Search-2.json", nil)
+	return http.NewRequest(http.MethodGet, "/json/Main-2.json", nil)
 }
 
 func (e *Endpoint) ParseResponse(response *http.Response) error {

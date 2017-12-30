@@ -15,5 +15,5 @@ type Serial struct {
 	TitleEn       string  `json:"TITLE_EN"`
 	TitleRu       string  `json:"TITLE_RU"`
 	Watched       int64   `json:"WATCHED,string"`
-	Year          int64   `json:"YEAR,string"`
+	Year          int32   `json:"YEAR,string"`
 }
