@@ -3,7 +3,10 @@ package search
 import (
 	"net/http"
 	"encoding/json"
+	"github.com/pkg/errors"
 )
+
+var UnexpectedStatusCode = errors.New("Unexpected status code")
 
 type Endpoint struct {
 	Serials []Serial
@@ -18,6 +21,10 @@ func (e *Endpoint) BuildHttpRequest() (*http.Request, error) {
 }
 
 func (e *Endpoint) ParseResponse(response *http.Response) error {
+	if response.StatusCode != http.StatusOK {
+		return UnexpectedStatusCode
+	}
+
 	decoder := json.NewDecoder(response.Body)
 	return decoder.Decode(&e.Serials)
 }
