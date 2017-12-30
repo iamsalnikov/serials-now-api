@@ -1,7 +1,7 @@
 API-клиент для serials-now
 ==========================
 [![Build Status](https://travis-ci.org/iamsalnikov/serials-now-api.svg?branch=travis)](https://travis-ci.org/iamsalnikov/serials-now-api)
-(https://img.shields.io/github/license/iamsalnikov/serials-now-api.svg)](https://github.com/iamsalnikov/serials-now-api/blob/master/LICENSE.md)
+[![GitHub license](https://img.shields.io/github/license/iamsalnikov/serials-now-api.svg)](https://github.com/iamsalnikov/serials-now-api/blob/master/LICENSE.md)
 
 ## Принцип работы
 
