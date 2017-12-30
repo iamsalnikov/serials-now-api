@@ -1,9 +1,9 @@
 package search
 
 import (
-	"net/http"
 	"encoding/json"
 	"github.com/pkg/errors"
+	"net/http"
 )
 
 var UnexpectedStatusCode = errors.New("Unexpected status code")
@@ -28,4 +28,3 @@ func (e *Endpoint) ParseResponse(response *http.Response) error {
 	decoder := json.NewDecoder(response.Body)
 	return decoder.Decode(&e.Serials)
 }
-

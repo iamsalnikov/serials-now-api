@@ -1,25 +1,25 @@
 package search
 
 import (
-	"testing"
-	"net/http/httptest"
-	"net/http"
 	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 )
 
 func TestEndpoint_ParseResponse(t *testing.T) {
-	testCases := []map[string]interface{} {
+	testCases := []map[string]interface{}{
 		{
-			"path": "/not-empty-search.json",
+			"path":           "/not-empty-search.json",
 			"expectedLength": 2,
 		},
 		{
-			"path": "/empty-search.json",
+			"path":           "/empty-search.json",
 			"expectedLength": 0,
 		},
 	}
 
-	handler := func (w http.ResponseWriter, r *http.Request) {
+	handler := func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		filePath := "testdata" + r.URL.Path
@@ -57,7 +57,7 @@ func TestEndpoint_ParseResponse(t *testing.T) {
 }
 
 func TestEndpoint_ParseResponseBadStatus(t *testing.T) {
-	handler := func (w http.ResponseWriter, r *http.Request) {
+	handler := func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 

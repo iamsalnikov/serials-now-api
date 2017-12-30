@@ -7,7 +7,7 @@ import (
 
 type Client struct {
 	baseUri *url.URL
-	client *http.Client
+	client  *http.Client
 }
 
 func NewClient(baseUri string) (*Client, error) {
@@ -18,7 +18,7 @@ func NewClient(baseUri string) (*Client, error) {
 
 	return &Client{
 		baseUri: uri,
-		client: http.DefaultClient,
+		client:  http.DefaultClient,
 	}, nil
 }
 
