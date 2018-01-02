@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	LOGIN_COOKIE_NAME    = "Login"
-	PASSWORD_COOKIE_NAME = "Password"
+	LoginCookieName    = "Login"
+	PasswordCookieName = "Password"
 )
 
 type Client struct {
@@ -22,7 +22,7 @@ func NewClient(baseUri string) (*Client, error) {
 		return &Client{}, err
 	}
 
-	jar, err := cookiejar.New(&cookiejar.Options{})
+	jar, err := cookiejar.New(nil)
 	if err != nil {
 		return &Client{}, err
 	}
@@ -55,11 +55,11 @@ func (c *Client) Send(endpoint EndpointInterface) error {
 }
 
 func (c *Client) SetLogin(login string) {
-	c.SetCookie(LOGIN_COOKIE_NAME, login)
+	c.SetCookie(LoginCookieName, login)
 }
 
 func (c *Client) SetPassword(password string) {
-	c.SetCookie(PASSWORD_COOKIE_NAME, password)
+	c.SetCookie(PasswordCookieName, password)
 }
 
 func (c *Client) SetCookie(name, value string) {

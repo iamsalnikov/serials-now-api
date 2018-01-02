@@ -98,7 +98,7 @@ func TestClient_SetLogin(t *testing.T) {
 
 	has := false
 	for _, cookie := range client.client.Jar.Cookies(client.baseUri) {
-		has = cookie.Name == LOGIN_COOKIE_NAME && cookie.Value == "hello"
+		has = cookie.Name == LoginCookieName && cookie.Value == "hello"
 		if has {
 			break
 		}
@@ -119,7 +119,7 @@ func TestClient_SetPassword(t *testing.T) {
 
 	has := false
 	for _, cookie := range client.client.Jar.Cookies(client.baseUri) {
-		has = cookie.Name == PASSWORD_COOKIE_NAME && cookie.Value == "hello"
+		has = cookie.Name == PasswordCookieName && cookie.Value == "hello"
 		if has {
 			break
 		}
