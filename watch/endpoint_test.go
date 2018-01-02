@@ -79,3 +79,24 @@ func TestEndpoint_ParseResponseBadStatus(t *testing.T) {
 		t.Errorf("I expected error \"%s\" but got \"%s\"", UnexpectedStatusCode, err)
 	}
 }
+
+func TestEndpoint_ParseResponseBadRequest(t *testing.T) {
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"Response":"Неверный запрос."}`))
+	}
+
+	server := httptest.NewServer(http.HandlerFunc(handler))
+
+	response, err := http.Post(server.URL, "test", nil)
+	if err != nil {
+		t.Errorf("Couldn't create client: %s", err)
+	}
+
+	endpoint := NewEndpoint(10, 2, 10, 2)
+	err = endpoint.ParseResponse(response)
+
+	if err != BadRequest {
+		t.Errorf("I expected error \"%s\" but got \"%s\"", UnexpectedStatusCode, err)
+	}
+}

@@ -1,6 +1,7 @@
 package watch
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/url"
@@ -9,6 +10,7 @@ import (
 )
 
 var UnexpectedStatusCode = errors.New("unexpected status code")
+var BadRequest = errors.New("bad request")
 
 type Endpoint struct {
 	SerialID     int64
@@ -47,6 +49,18 @@ func (e *Endpoint) BuildHttpRequest() (*http.Request, error) {
 func (e *Endpoint) ParseResponse(response *http.Response) error {
 	if response.StatusCode != http.StatusOK {
 		return UnexpectedStatusCode
+	}
+
+	answer := &answer{}
+
+	decoder := json.NewDecoder(response.Body)
+	err := decoder.Decode(answer)
+	if err != nil {
+		return err
+	}
+
+	if answer.Response != "" {
+		return BadRequest
 	}
 
 	return nil
